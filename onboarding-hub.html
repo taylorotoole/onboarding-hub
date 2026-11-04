@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Onboarding Hub · Joy Care Unit</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#EFEBE0;--card:#FAF8F2;--ink:#2B2A26;--muted:#6B675C;--accent:#3F6B57;--accent-ink:#fff;--line:#D8D2C2;--soft:#E3EDE6;--warn:#B5651D}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1C1B18;--card:#282722;--ink:#EDE9DD;--muted:#A6A193;--accent:#7FB89B;--accent-ink:#13201A;--line:#3B3932;--soft:#2F3B34;--warn:#E0A060}}
+:root[data-theme="dark"]{--bg:#1C1B18;--card:#282722;--ink:#EDE9DD;--muted:#A6A193;--accent:#7FB89B;--accent-ink:#13201A;--line:#3B3932;--soft:#2F3B34;--warn:#E0A060}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 16px 48px}
+h1{font:600 clamp(24px,4.5vw,34px)/1.15 Georgia,serif;margin:0}
+h1 em{color:var(--accent)}
+.sub{color:var(--muted);margin:4px 0 18px}
+h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;font-weight:600}
+.back{background:none;color:var(--accent);padding:0;margin-bottom:10px;font-weight:600}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.panel{margin-bottom:16px}
+.stat b{display:block;font:600 26px Georgia,serif}
+.stat span{color:var(--muted);font-size:13px}
+.big{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+@media(max-width:760px){.big{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.big{grid-template-columns:1fr}}
+.big button{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:20px 16px;text-align:left;display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:16px;transition:.15s}
+.big button span{font-size:26px}
+.big button small{font-weight:400;color:var(--muted);font-size:13px}
+.big button:hover,.big button:focus-visible{border-color:var(--accent);background:var(--soft);outline:none;transform:translateY(-2px)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+@media(max-width:760px){.two{grid-template-columns:1fr}}
+input,select,textarea{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);min-width:0}
+button{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:9px;padding:9px 14px;background:var(--accent);color:var(--accent-ink)}
+button.ghost{background:none;color:var(--muted);border:1px solid var(--line);font-weight:500;padding:5px 10px;font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row input[type=text],.row input[type=url],.row input[type=search]{flex:1 1 140px}
+.tl{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.tl>div{position:relative}
+.tl a,.tl .tile{display:block;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;width:100%;text-align:left}
+.tl a small,.tile small{display:block;font-weight:400;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis}
+.tl a:hover,.tl a:focus-visible{border-color:var(--accent);background:var(--soft);outline:none}
+.tile.unset{border-style:dashed;color:var(--muted);cursor:pointer}
+.ed{position:absolute;top:4px;right:6px;background:none;color:var(--muted);padding:2px 6px;font-weight:400;font-size:14px}
+.cts a{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none}
+.cts a:last-child{border:0}.cts span{color:var(--muted)}
+.hire{border:1px solid var(--line);border-radius:12px;background:var(--card);margin-bottom:10px;overflow:hidden}
+.hh{display:flex;gap:12px;align-items:center;padding:12px 14px;cursor:pointer;flex-wrap:wrap}
+.nm{font-weight:600;flex:1 1 140px}
+.tag{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--accent)}
+.tag.w{background:none;border:1px solid var(--warn);color:var(--warn)}
+.bar{flex:1 1 120px;height:8px;background:var(--line);border-radius:6px;overflow:hidden;min-width:90px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.pct{font-size:13px;color:var(--muted);width:48px;text-align:right}
+.body{padding:2px 14px 14px;border-top:1px solid var(--line)}
+.stage{margin-top:12px}
+.stage h3{font-size:13px;margin:0 0 4px;color:var(--accent)}
+.stage label,.ck label{display:flex;gap:8px;align-items:flex-start;padding:3px 0;cursor:pointer}
+.stage input,.ck input{margin-top:3px;accent-color:var(--accent)}
+label.done span{text-decoration:line-through;color:var(--muted)}
+textarea{width:100%;margin-top:12px;min-height:60px;resize:vertical}
+.acts{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.empty{color:var(--muted);text-align:center;padding:20px}
+.note{color:var(--muted);font-size:12px;margin:8px 0 0}
+.mx{width:100%;border-collapse:collapse;font-size:13px}
+.mx th,.mx td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+.mx th:first-child,.mx td:first-child{text-align:left}
+.mx tr.r{cursor:pointer}.mx tr.r:hover td{background:var(--soft)}.mx tr.sel td{background:var(--soft)}
+.c{display:inline-block;min-width:38px;padding:2px 6px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.c.ok{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.c.pt{border-color:var(--warn);color:var(--warn)}
+.scroll{overflow-x:auto}
+.person{display:flex;flex-direction:column;gap:2px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card);position:relative}
+.person b{font-size:15px}.person span{color:var(--muted);font-size:13px}
+.person a{color:var(--accent);font-size:13px;text-decoration:none}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.cols2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+const STAGES=[
+ ["1 · Screening",["Interview completed","References verified (2)","Offer accepted"]],
+ ["2 · Credentials",["License verified (Nursys / Idaho BON)","OIG exclusion check clear","SAM.gov check clear","CPR/BLS card on file"]],
+ ["3 · Clearances",["DHW background check submitted","Background check cleared","TB test / health screen","Immunization records"]],
+ ["4 · Paperwork",["I-9 completed","W-4 and direct deposit","Handbook and HIPAA acknowledgment signed"]],
+ ["5 · Training",["Compliance and HIPAA training","Pediatric trach/vent competency","G-tube and specialty skills check","Orientation completed"]],
+ ["6 · Go-live",["EHR and scheduling access","Matched with a family","First shift confirmed"]]
+];
+const TOTAL=STAGES.reduce((a,s)=>a+s[1].length,0);
+const B="https://joycareunit.com/";
+const L=(n,u,d)=>({n,u,d});
+const DEF={hires:[],people:[],
+ contacts:[{n:"Joy Care Unit (main)",role:"Agency",ph:"208-580-7117",em:"hello@joycareunit.com"},
+  {n:"Idaho Background Check Unit",role:"DHW",ph:"208-332-7990",em:"bcu@dhw.idaho.gov"}],
+ res:{handbook:"",policies:"",drive:""},
+ links:{
+  scheduling:[],
+  documents:[L("Form I-9","https://www.uscis.gov/i-9","USCIS"),L("Form W-4","https://www.irs.gov/forms-pubs/about-form-w-4","IRS"),
+   L("HIPAA Notice",B+"hipaa-notice","Privacy practices"),L("Nondiscrimination Notice",B+"nondiscrimination","English"),
+   L("Aviso de no discriminación",B+"nondiscrimination-es","Español"),L("Privacy Policy",B+"privacy","")],
+  training:[L("AHA CPR/BLS","https://cpr.heart.org","Card & class info"),
+   L("HHS HIPAA training","https://www.hhs.gov/hipaa/for-professionals/training/index.html","Federal materials"),
+   L("Who We Serve",B+"who-we-serve","Case types for orientation"),L("What Is PDN?",B+"pediatric-private-duty-nursing","Private duty nursing")]}};
+let S;
+try{S=Object.assign({},DEF,JSON.parse(localStorage.getItem("jcu-hub")||"{}"))}catch(e){S=JSON.parse(JSON.stringify(DEF))}
+const save=()=>{try{localStorage.setItem("jcu-hub",JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const safeUrl=u=>{u=(u||"").trim();if(!u)return"";if(!/^https?:\/\//i.test(u))u="https://"+u;try{return new URL(u).href}catch(e){return""}};
+const host=u=>{try{return new URL(u).hostname}catch(e){return""}};
+const pct=h=>Math.round(h.done.length/TOTAL*100);
+const days=h=>Math.floor((Date.now()-h.added)/864e5);
+let open={},sel=null,editing={},conf=null,q="";
+
+const VIEWS={
+ "new-nurse":"New nurse onboarding","checklist":"Onboarding checklist","directory":"Employee directory",
+ "scheduling":"Scheduling","documents":"Documents and forms","training":"Training resources","contacts":"Important contacts"};
+const view=()=>{const v=location.hash.slice(1);return VIEWS[v]?v:"home"};
+window.go=v=>{location.hash=v==="home"?"":v;q="";window.scrollTo(0,0)};
+window.addEventListener("hashchange",()=>{q="";draw()});
+
+function head(v){return v==="home"?
+ `<h1>${(h=>h<12?"Good morning":h<17?"Good afternoon":"Good evening")(new Date().getHours())}, <em>Onboarding</em></h1>
+  <p class="sub">${new Date().toLocaleDateString(undefined,{weekday:"long",month:"long",day:"numeric",year:"numeric"})} · Joy Care Unit</p>`:
+ `<button class="back" onclick="go('home')">← Home</button><h1>${VIEWS[v]}</h1><p class="sub"></p>`}
+
+function tools(list){return `<div class="tl">${list.map(([n,u,d])=>`<a href="${u}" target="_blank" rel="noopener noreferrer">${n}<small>${d}</small></a>`).join("")}</div>`}
+
+/* ---------- Home ---------- */
+function resTile(k,label){const u=S.res[k];const ed=editing[k];
+ return `<div>${u?`<a class="tile" style="display:block;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${label}<small>${esc(host(u))}</small></a>`
+  :`<button class="tile unset" onclick="edRes('${k}')">${label}<small>Tap to set link</small></button>`}
+  ${u?`<button class="ed" title="Edit link" onclick="edRes('${k}')">✎</button>`:""}
+  ${ed?`<div class="row" style="margin-top:6px"><input type="url" id="r-${k}" placeholder="https://…" value="${esc(u)}" aria-label="${label} link"><button onclick="saveRes('${k}')">Save</button></div>`:""}</div>`}
+window.edRes=k=>{editing[k]=!editing[k];draw()};
+window.saveRes=k=>{S.res[k]=safeUrl(document.getElementById("r-"+k).value);editing[k]=false;save();draw()};
+
+function home(){
+ const act=S.hires.filter(h=>pct(h)<100).length,rdy=S.hires.filter(h=>pct(h)===100).length;
+ const avg=S.hires.length?Math.round(S.hires.reduce((a,h)=>a+pct(h),0)/S.hires.length):0;
+ const old=S.hires.filter(h=>days(h)>=7&&pct(h)<100).length;
+ const tiles=[["new-nurse","🩺","New nurse onboarding","Everything for a new hire"],["checklist","✅","Onboarding checklist","What’s done, what’s open"],
+  ["directory","👥","Employee directory","Find anyone fast"],["scheduling","📅","Scheduling","Shifts & placements"],
+  ["documents","📄","Documents and forms","Forms, notices, policies"],["training","🎓","Training resources","Courses & competencies"]];
+ return head("home")+`
+ <div class="stats">
+  <div class="stat"><b>${act}</b><span>Nurses in onboarding</span></div><div class="stat"><b>${rdy}</b><span>Ready for case match</span></div>
+  <div class="stat"><b>${avg}%</b><span>Average progress</span></div><div class="stat"><b>${old}</b><span>Open 7+ days</span></div></div>
+ <div class="big">${tiles.map(([v,i,t,d])=>`<button onclick="go('${v}')"><span>${i}</span>${t}<small>${d}</small></button>`).join("")}</div>
+ <div class="two">
+  <div class="panel cts"><h2>Key contacts</h2>
+   <a href="mailto:hello@joycareunit.com">Joy Care Unit email <span>hello@joycareunit.com</span></a>
+   <a href="tel:2085807117">Agency phone <span>208-580-7117</span></a>
+   <a href="tel:2083327990">Idaho Background Check Unit <span>208-332-7990</span></a>
+   <a href="mailto:bcu@dhw.idaho.gov">BCU email <span>bcu@dhw.idaho.gov</span></a></div>
+  <div class="panel"><h2>Important resources</h2><div class="tl" style="grid-template-columns:1fr 1fr">
+   ${resTile("handbook","Employee Handbook")}${resTile("policies","Clinical Policies &amp; Procedures")}
+   <div><button class="tile" style="border:1px solid var(--line);background:var(--bg);color:var(--ink)" onclick="go('contacts')">Important Contacts<small>Open list</small></button></div>
+   ${resTile("drive","Shared Company Drive")}</div>
+   <p class="note">Set each link once; it’s saved in this browser.</p></div></div>`}
+
+/* ---------- Checklist items ---------- */
+window.tog=(id,it,on)=>{const h=S.hires.find(x=>x.id===id);h.done=on?[...h.done,it]:h.done.filter(x=>x!==it);save();draw()};
+window.opn=id=>{open[id]=!open[id];draw()};
+window.rmH=id=>{if(conf!==id){conf=id;draw();return}S.hires=S.hires.filter(x=>x.id!==id);conf=null;save();draw()};
+window.note=(id,v)=>{S.hires.find(x=>x.id===id).notes=v;save()};
+const chk=(h,it)=>{const c=h.done.includes(it);return `<label class="${c?"done":""}"><input type="checkbox" ${c?"checked":""} onchange="tog(${h.id},this.dataset.i,this.checked)" data-i="${esc(it)}"><span>${esc(it)}</span></label>`};
+
+/* ---------- New nurse ---------- */
+window.addH=()=>{const n=document.getElementById("hn").value.trim();if(!n)return;
+ const h={id:Date.now(),name:n,role:document.getElementById("hr").value,added:Date.now(),done:[],notes:""};
+ S.hires.unshift(h);open[h.id]=true;save();draw()};
+function newNurse(){
+ const cards=S.hires.length?S.hires.map(h=>{const p=pct(h),st=days(h)>=7&&p<100;
+  return `<div class="hire"><div class="hh" onclick="opn(${h.id})"><span class="nm">${esc(h.name)}</span><span class="tag">${h.role}</span>${st?`<span class="tag w">Day ${days(h)}</span>`:""}<div class="bar"><i style="width:${p}%"></i></div><span class="pct">${p}%</span></div>
+  ${open[h.id]?`<div class="body">${STAGES.map(([t,its])=>`<div class="stage"><h3>${t}</h3>${its.map(i=>chk(h,i)).join("")}</div>`).join("")}
+   <textarea placeholder="Notes (follow-ups, expiring documents, scheduling)" onchange="note(${h.id},this.value)">${esc(h.notes)}</textarea>
+   <div class="acts"><span class="note">Started ${new Date(h.added).toLocaleDateString()}</span><button class="ghost" onclick="rmH(${h.id})">${conf===h.id?"Click again to confirm":"Remove"}</button></div></div>`:""}</div>`}).join("")
+  :`<div class="empty panel">No nurses in onboarding yet. Add your first new hire above.</div>`;
+ return head("new-nurse")+`<div class="two" style="grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)">
+  <div><div class="panel"><h2>Add a new hire</h2><div class="row"><input type="text" id="hn" placeholder="Nurse name" aria-label="Nurse name" onkeydown="if(event.key==='Enter')addH()">
+   <select id="hr" aria-label="Role"><option>RN</option><option>LPN</option></select><button onclick="addH()">Start onboarding</button></div></div>
+   <h2>Nurses in onboarding</h2>${cards}</div>
+  <div><div class="panel"><h2>Verify licensure</h2>${tools([["Nursys","https://www.nursys.com","License verification"],["Idaho Board of Nursing","https://dopl.idaho.gov/nur/","License lookup"]])}
+   <h2 style="margin-top:14px">Exclusion checks</h2>${tools([["OIG LEIE","https://exclusions.oig.hhs.gov","Exclusion search"],["SAM.gov","https://sam.gov","Federal exclusions"]])}
+   <h2 style="margin-top:14px">Background &amp; eligibility</h2>${tools([["Idaho Background Check Unit","https://healthandwelfare.idaho.gov/bcu","DHW fingerprint check"],["Form I-9","https://www.uscis.gov/i-9","USCIS"],["E-Verify","https://www.e-verify.gov","If used by agency"],["AHA CPR/BLS","https://cpr.heart.org","Card verification"]])}</div>
+   <div class="panel"><h2>Next steps</h2><div class="row"><button class="ghost" onclick="go('documents')">Documents and forms</button><button class="ghost" onclick="go('training')">Training</button><button class="ghost" onclick="go('scheduling')">Scheduling</button></div></div></div></div>`}
+
+/* ---------- Checklist overview ---------- */
+window.pick=id=>{sel=sel===id?null:id;draw()};
+function checklist(){
+ if(!S.hires.length)return head("checklist")+`<div class="empty panel">No nurses yet. Add one under <a href="#new-nurse" style="color:var(--accent)">New nurse onboarding</a> and their workflow will appear here.</div>`;
+ const rows=S.hires.map(h=>`<tr class="r ${sel===h.id?"sel":""}" onclick="pick(${h.id})"><td><b>${esc(h.name)}</b> <span class="tag">${h.role}</span></td>
+  ${STAGES.map(([,its])=>{const d=its.filter(i=>h.done.includes(i)).length;return `<td><span class="c ${d===its.length?"ok":d?"pt":""}">${d}/${its.length}</span></td>`}).join("")}<td>${pct(h)}%</td></tr>`).join("");
+ const h=S.hires.find(x=>x.id===sel);
+ const det=h?`<div class="panel"><h2>${esc(h.name)} · ${pct(h)}% complete</h2><div class="cols2 ck">
+  <div><h3 style="font-size:13px;color:var(--warn);margin:0 0 6px">Still needed (${TOTAL-h.done.length})</h3>${STAGES.map(([t,its])=>{const o=its.filter(i=>!h.done.includes(i));return o.length?`<div class="stage"><h3>${t}</h3>${o.map(i=>chk(h,i)).join("")}</div>`:""}).join("")||'<p class="note">Everything is complete. Ready for case match.</p>'}</div>
+  <div><h3 style="font-size:13px;color:var(--accent);margin:0 0 6px">Completed (${h.done.length})</h3>${STAGES.map(([t,its])=>{const o=its.filter(i=>h.done.includes(i));return o.length?`<div class="stage"><h3>${t}</h3>${o.map(i=>chk(h,i)).join("")}</div>`:""}).join("")||'<p class="note">Nothing completed yet.</p>'}</div></div></div>`
+  :`<p class="note">Select a nurse to see what’s completed and what’s still needed.</p>`;
+ return head("checklist")+`<div class="panel scroll"><table class="mx"><thead><tr><th>Nurse</th>${STAGES.map(([t])=>`<th>${t.replace(" · ","<br>")}</th>`).join("")}<th>Total</th></tr></thead><tbody>${rows}</tbody></table></div>${det}`}
+
+/* ---------- People lists (directory / important contacts) ---------- */
+window.addP=k=>{const g=i=>document.getElementById(i).value.trim();if(!g("pn"))return;
+ S[k].push({n:g("pn"),role:g("pr"),ph:g("pp"),em:g("pe")});save();draw()};
+window.rmP=(k,i)=>{S[k].splice(i,1);save();draw()};
+window.srch=v=>{q=v.toLowerCase();draw();const e=document.getElementById("sq");e.focus();e.setSelectionRange(v.length,v.length)};
+function people(v,k){
+ const list=S[k].map((p,i)=>({p,i})).filter(({p})=>!q||(p.n+" "+p.role).toLowerCase().includes(q));
+ return head(v)+`<div class="panel"><div class="row"><input type="search" id="sq" placeholder="Search by name or role…" value="${esc(q)}" oninput="srch(this.value)" aria-label="Search"></div></div>
+ <div class="tl">${list.map(({p,i})=>`<div class="person"><b>${esc(p.n)}</b><span>${esc(p.role)}</span>${p.ph?`<a href="tel:${esc(p.ph.replace(/[^\d+]/g,""))}">${esc(p.ph)}</a>`:""}${p.em?`<a href="mailto:${esc(p.em)}">${esc(p.em)}</a>`:""}<button class="ed" title="Remove" onclick="rmP('${k}',${i})">×</button></div>`).join("")||`<div class="empty">${S[k].length?"No matches.":"No one added yet."}</div>`}</div>
+ <div class="panel" style="margin-top:16px"><h2>Add a person</h2><div class="row"><input type="text" id="pn" placeholder="Name" aria-label="Name"><input type="text" id="pr" placeholder="Role / title" aria-label="Role">
+  <input type="text" id="pp" placeholder="Phone" aria-label="Phone"><input type="text" id="pe" placeholder="Email" aria-label="Email"><button onclick="addP('${k}')">Add</button></div><p class="note">Saved in this browser only.</p></div>`}
+
+/* ---------- Link lists (scheduling / documents / training) ---------- */
+const HINT={scheduling:"Add the link to your scheduling system (shift calendar, nurse availability, case assignments).",documents:"Forms, notices and templates the specialist hands to new hires.",training:"Courses, competency checklists and orientation material."};
+window.addL=k=>{const n=document.getElementById("ln").value.trim(),u=safeUrl(document.getElementById("lu").value);if(!n||!u)return;S.links[k].push(L(n,u,host(u)));save();draw()};
+window.rmL=(k,i)=>{S.links[k].splice(i,1);save();draw()};
+function links(v){return head(v)+`<p class="sub" style="margin-top:-12px">${HINT[v]}</p><div class="panel"><div class="tl">${
+ S.links[v].map((l,i)=>`<div><a href="${esc(l.u)}" target="_blank" rel="noopener noreferrer">${esc(l.n)}<small>${esc(l.d||host(l.u))}</small></a><button class="ed" title="Remove" onclick="rmL('${v}',${i})">×</button></div>`).join("")||`<div class="empty">Nothing here yet. Add your first link below.</div>`}</div></div>
+ <div class="panel"><h2>Add a link</h2><div class="row"><input type="text" id="ln" placeholder="Name" aria-label="Link name"><input type="url" id="lu" placeholder="https://…" aria-label="Link URL"><button onclick="addL('${v}')">Add</button></div><p class="note">Saved in this browser only.</p></div>`}
+
+function draw(){const v=view(),a=document.getElementById("app");
+ a.innerHTML=v==="home"?home():v==="new-nurse"?newNurse():v==="checklist"?checklist():v==="directory"?people(v,"people"):v==="contacts"?people(v,"contacts"):links(v)}
+draw();
+</script>
+</body>
+</html>
